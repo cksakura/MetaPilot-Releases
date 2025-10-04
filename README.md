@@ -31,7 +31,7 @@ We usually publish two artifacts:
 ## 🚀 Quick Start
 
 ### Portable ZIP
-1. Download `MetaPilot.7z` from **[Releases](../../releases)**.
+1. Download `MetaPilot.7z` and 'Resources.7z' from **[Releases](../../releases)**.
 2. Extract to a short path (e.g., `C:\Apps\MetaPilot\`).
 3. Double-click `MetaPilot.exe`.
 
