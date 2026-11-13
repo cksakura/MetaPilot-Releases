@@ -37,8 +37,8 @@ MetaPilot runs on Java 17 or newer. The HPC runs for this version use Java 21.
 
 | Tool | Required for |
 | --- | --- |
-| FragPipe 24, with MSFragger, Crystal-C, and MSBooster under its `tools/` directory | DDA MAG FragPipe and DDA open search |
-| DIA-NN 1.8.x on the cluster; the Windows GUI can use a current DIA-NN | Open-search rescoring, and every DIA workflow |
+| FragPipe 24, with MSFragger, Crystal-C, MSBooster, and the DIA-NN 1.8.x binary under its `tools/` directory | DDA MAG FragPipe and DDA open search. MetaPilot uses that bundled 1.8 binary only to predict spectra. A DIA search does not use it |
+| DIA-NN 2.x, installed separately and set as `DIANN` | DIA Marker, DIA Seed, DIA Target, and DIA Real-Time |
 | FlashLFQ | Peptide quantification. On Linux this is the .NET build, so `dotnet` must be on `PATH` |
 | Python 3 | Report pages |
 | Functional annotation database | `functional_annotation/` |
@@ -84,12 +84,14 @@ Set a path that `resources-check` reports as missing:
 java -jar metapilot-cli-1.2.0-shaded.jar resources-set \
   --set FRAGPIPE=/opt/fragpipe-24.0/bin/fragpipe \
   --set FRAGPIPE_TOOLS=/opt/fragpipe-24.0/tools \
-  --set DIANN=/opt/fragpipe-24.0/tools/diann/1.8.2_beta_8/linux/diann-1.8.1.8 \
+  --set DIANN=/opt/diann/diann \
   --set FLASHLFQ=/opt/metapilot/FlashLFQ/CMD \
   --set PYTHON=/opt/conda/envs/metapilot/bin/python \
   --set FUNCDB=/data/metapilot/function/func_def.db \
   --print
 ```
+
+`DIANN` is the program a DIA search runs. Point it at the separate DIA-NN 2 installation. Do not point it at `tools/diann/1.8.2_beta_8/.../diann-1.8.1.8`. Open search finds that 1.8 binary itself from `FRAGPIPE_TOOLS` and uses it for spectrum prediction.
 
 `dotnet --version` must succeed on the compute node before a run that quantifies peptides.
 
